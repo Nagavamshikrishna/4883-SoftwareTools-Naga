@@ -1,6 +1,0 @@
-The most common security vulnerabilities that can be found in wearable devices from the attack surfaces shown above. The factors such as 
-i) Unsure transmission of data Bluetooth for local device storage;
-ii) Software communication to the Cloud via a cellular or Wi-Fi network; 
-iii) Insecure data storage on Cloud; 
-iv) Lack of authentication and authorization and 
-v) Lack of physical security controls
