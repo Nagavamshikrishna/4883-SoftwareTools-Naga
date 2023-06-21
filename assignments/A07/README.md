@@ -27,9 +27,17 @@ We can scrape data for daily, weekly and montly as follows:
 
 ![monthlyWeatherData_Table](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/7e0642f7-68a3-48af-8002-f36442f8026f)
 
+## Files
 
-
-| Attempt | #1    | #2    |
+| S.No  | File  | Description |    
 | :---:   | :---: | :---: |
-| Seconds | 301   | 283   |
+| 1  | airport-codes.csv   | airport data for the GUI and scraping   |
+| 2  | main.py   | python code to create GUI as well code to scrape the data from a dynamic website   |
+
+## Summary
+1) Design a user-friendly data entry form using PySimpleGUI to gather inputs for day, month, year, airport, and filter (daily, weekly, monthly).
+2) Upon submitting the form, generate a URL specific to the entered details for querying weather data.
+3) Use the Selenium library to interact with website, retrieve the asynchronous data, and handle dynamic content loading.
+4) Utilize Beautiful Soup (BS4) to parse the received data and extract the relevant weather information.
+5) Use PySimpleGUI present the extracted weather data in an organized and visually appealing manner.
 
