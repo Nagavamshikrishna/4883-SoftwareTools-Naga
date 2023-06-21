@@ -52,7 +52,7 @@ def daily():
 
 
 def weekly():
-    # TODO: Implement the functionality for the weekly option
+    
     soup = BeautifulSoup(page_source, 'html.parser')
 
     table = soup.find('lib-city-history-observation')
@@ -65,7 +65,7 @@ def weekly():
     for th in ths:
         headers.append(th.text)
     
-    #print(headers)
+    print(headers)
 
     tbody = table.find("tbody")
     rows = tbody.find_all("tr")
@@ -80,11 +80,31 @@ def weekly():
             row_data.append(th.text)
         rows_data.append(row_data)
           
-    # print(rows_data)
+    
 
     data = rows_data[1:]
+    final_data=[]
+    for i in data:
+        s=""
+        das="  "
+        for j in i:
+            s=s+das+j
+        final_data.append(s)
+    
+    d=int(len(final_data)/len(headers))
+    find=[]
+    for i in range(0,d):
+        j=i
+        a=[]
+        while(j<len(final_data)):
+            a.append(final_data[j])
+            j=j+d
+        find.append(a)
+    print(find)
+
+    
     layout = [
-        [sg.Table(values=data, headings=headers, justification='left')]
+        [sg.Table(values=find, headings=headers, justification='left')]
     ]
 
 
@@ -124,9 +144,27 @@ def monthly():
    # print(rows_data)
 
     data = rows_data[1:]
-    print(data)
+    
+    final_data=[]
+    for i in data:
+        s=""
+        das="  "
+        for j in i:
+            s=s+das+j
+        final_data.append(s)
+    
+    d=int(len(final_data)/len(headers))
+    find=[]
+    for i in range(0,d):
+        j=i
+        a=[]
+        while(j<len(final_data)):
+            a.append(final_data[j])
+            j=j+d
+        find.append(a)
+    print(find)
     layout = [
-        [sg.Table(values=data, headings=headers, justification='left')]
+        [sg.Table(values=find, headings=headers, justification='left')]
     ]
 
     window = sg.Window('Weather Data', layout)
@@ -155,7 +193,12 @@ if __name__ == '__main__':
 
     window = sg.Window('Get The Weather', layout)
 
-    event, values = window.read()
+    
+    while True:
+        event, values = window.read()
+
+        if event == sg.WINDOW_CLOSED or event == 'Close' or event == 'Submit':
+            break
     window.close()
 
     month = int(values['-MONTH-'])
@@ -164,7 +207,7 @@ if __name__ == '__main__':
     code = values['-CODE-']
     filter_type = values['-FILTER-']
 
-    # sg.popup('You entered', f"Month: {month}, Day: {day}, Year: {year}, Code: {code}, Filter: {filter_type}")
+    sg.popup('You entered', f"Month: {month}, Day: {day}, Year: {year}, Code: {code}, Filter: {filter_type}")
 
     base_url = "https://www.wunderground.com/history"
     url = f"{base_url}/{filter_type}/{code}/date/{year}-{month:02d}-{day:02d}"
