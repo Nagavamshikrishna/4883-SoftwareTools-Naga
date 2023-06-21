@@ -14,7 +14,7 @@ We can verify the input data from the pop up as follow
 Above is the data input form GUI to provide the information to scrape data.
 
 We can scrape data for daily, weekly and montly as follows:
-### Day Weathe Image
+### Day Weather Image
 
 ![dayWeatherData_Table](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/bb94d578-779b-43ca-a5fd-69c3bf4b49e5)
 
