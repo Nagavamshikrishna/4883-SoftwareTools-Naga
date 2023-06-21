@@ -28,7 +28,6 @@ We can scrape data for daily, weekly and montly as follows:
 ![monthlyWeatherData_Table](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/7e0642f7-68a3-48af-8002-f36442f8026f)
 
 
-| S.no  | File | Description |
-------------------------------
-|        |     |              |
+
+
 
