@@ -29,5 +29,7 @@ We can scrape data for daily, weekly and montly as follows:
 
 
 
-
+| Attempt | #1    | #2    |
+| :---:   | :---: | :---: |
+| Seconds | 301   | 283   |
 
