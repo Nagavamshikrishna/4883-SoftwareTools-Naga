@@ -176,20 +176,19 @@ if __name__ == '__main__':
         reader = csv.DictReader(f)
         airport_data = list(reader)
         airport_codes = [airport['ident'] for airport in airport_data]
-
     layout = [
-        [sg.Text('Month')],
-        [sg.DropDown(values=list(range(1, 13)), default_value=1, key='-MONTH-')],
-        [sg.Text('Day')],
-        [sg.DropDown(values=list(range(1, 32)), default_value=1, key='-DAY-')],
-        [sg.Text('Year')],
-        [sg.DropDown(values=list(range(1900, datetime.now().year + 1)), default_value=datetime.now().year, key='-YEAR-')],
-        [sg.Text('Code')],
-        [sg.DropDown(values=airport_codes, default_value='YPJT', key='-CODE-')],
-        [sg.Text('Daily / Weekly / Monthly')],
-        [sg.DropDown(values=['daily', 'weekly', 'monthly'], default_value='daily', key='-FILTER-')],
-        [sg.Submit(), sg.Cancel()]
-    ]
+    [sg.Text('Month', size=(15, 1))],
+    [sg.DropDown(values=list(range(1, 13)), key='-MONTH-', size=(15, 1))],
+    [sg.Text('Day', size=(15, 1))],
+    [sg.DropDown(values=list(range(1, 32)), key='-DAY-', size=(15, 1))],
+    [sg.Text('Year', size=(15, 1))],
+    [sg.DropDown(values=list(range(1900, datetime.now().year + 1)), key='-YEAR-', size=(15, 1))],
+    [sg.Text('Code', size=(15, 1))],
+    [sg.DropDown(values=airport_codes,  key='-CODE-', size=(15, 1))],
+    [sg.Text('Daily / Weekly / Monthly', size=(15, 1))],
+    [sg.DropDown(values=['daily', 'weekly', 'monthly'], key='-FILTER-', size=(15, 1))],
+    [sg.Submit(), sg.Cancel()]
+]
 
     window = sg.Window('Get The Weather', layout)
 
