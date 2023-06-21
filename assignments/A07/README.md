@@ -3,15 +3,14 @@
 
 ### Sample input and output
 1) Select Day, month, year, airport code and select daily to scrape daily data, weekly to scrape weakly data and montly to get montly data.
-2)  
+ 
 ![dataInput](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/f1d23139-e372-4207-9d8b-b852048253ab)
 
-We can verify the input data from the pop up as follow
+Above is the data input form GUI to provide the information to scrape data.
+2) We can verify the input data from the pop up as follow
 
 ![inputDataVerification_Image](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/67dc8ec2-c1bc-4681-90e3-c173556ae05b)
 
-
-Above is the data input form GUI to provide the information to scrape data.
 
 We can scrape data for daily, weekly and montly as follows:
 ### Day Weather Image
