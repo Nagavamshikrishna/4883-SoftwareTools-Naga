@@ -20,6 +20,9 @@ Requirements:
 Usage: 
 In the first step created the csv random data. After generating the file, created a python script which will help in generating the dot. copied the dot file code and used graphviz to visualise the family tree.
 
+Output Image:
+
+![family_tree](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/assets/70953975/f16f5db8-8a1d-4250-9c77-bcf4c904cfe5)
 
 Resources: 
 1. https://graphviz.org/
