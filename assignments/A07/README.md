@@ -31,8 +31,9 @@ We can scrape data for daily, weekly and montly as follows:
 
 | S.No  | File  | Description |    
 | :---:   | :---: | :---: |
-| 1  | airport-codes.csv   | airport data for the GUI and scraping   |
-| 2  | main.py   | python code to create GUI as well code to scrape the data from a dynamic website   |
+
+|    01  |  [airport-codes.csv](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A07/airport-codes.csv)  | airport data for the GUI and scraping   |
+| 2  | [main.py](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A07/main.py)    | python code to create GUI as well code to scrape the data from a dynamic website   |
 
 ## Summary
 1) Design a user-friendly data entry form using PySimpleGUI to gather inputs for day, month, year, airport, and filter (daily, weekly, monthly).
