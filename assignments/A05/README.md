@@ -9,10 +9,10 @@ Create a dot file using python. Used a CSV file to read the data. The dot file g
 
 |   #   | File |  Description |
 | :---: | ----------- | ---------------------- |
-|    01  |  [family_data.csv](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/family_data.csv)| Assignment to find own software tools|  
-|    02  |  [family_tree.dot](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/family_tree.dot)| Binary search tree using graphviz| 
-|    03 |  [family_tree.png](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/tree/main/assignments/A05/family_tree.png)| FamilyTree via Graphviz| 
-|    04 |  [main.py](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/main.py)| Web Scraping| 
+|    01  |  [family_data.csv](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/family_data.csv)| CSV input data|  
+|    02  |  [family_tree.dot](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/family_tree.dot)|dot file generated from pyhton code| 
+|    03 |  [family_tree.png](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/tree/main/assignments/A05/family_tree.png)| Output of grahviz code| 
+|    04 |  [main.py](https://github.com/Nagavamshikrishna/4883-SoftwareTools-Naga/blob/main/assignments/A05/main.py)| python file to create dot file| 
 
 
 
