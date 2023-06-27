@@ -1,6 +1,6 @@
-#h3 Name: Naga Vamshi Krishn Jammalamadaka
+## Name: Naga Vamshi Krishn Jammalamadaka
 
-#h3 A05: Family Tree generation using Graphviz.
+## A05: Family Tree generation using Graphviz.
 
 Description:
 Create a dot file using python. Used a CSV file to read the data. The dot file generated will help in generating the family tree. lso, divided the the family on generation bases.
