@@ -68,7 +68,7 @@ def calculateDeaths(country=None, region=None, year=None):
     return deaths
 
 
-def calculateDeaths(country=None, region=None, year=None):
+def calculateCases(country=None, region=None, year=None):
     global db
     cases = 0
 
@@ -89,38 +89,39 @@ def findCountryWithMaxDeaths(min_date=None, max_date=None):
     global db
     max_deaths = 0
     country_with_max_deaths = None
-
+    deathsByCountry = {}
     for row in db:
         if min_date is not None and row[0] < min_date:
             continue
         if max_date is not None and row[0] > max_date:
             continue
 
-        deaths = int(row[5])
-        if deaths > max_deaths:
-            max_deaths = deaths
-            country_with_max_deaths = row[2]
-
-    return country_with_max_deaths
-
+        if row[2] not in deathsByCountry.keys():
+            deathsByCountry[row[2]]=int(row[5])
+        else:
+            deathsByCountry[row[2]]+=int(row[5])
+    v = list(deathsByCountry.values())
+    k = list(deathsByCountry.keys())
+    return k[v.index(max(v))]
 
 def findCountryWithMinDeaths(min_date=None, max_date=None):
     global db
     min_deaths = float('inf')
     country_with_min_deaths = None
-
+    deathsByCountry={}
     for row in db:
         if min_date is not None and row[0] < min_date:
             continue
         if max_date is not None and row[0] > max_date:
             continue
 
-        deaths = int(row[5])
-        if deaths < min_deaths:
-            min_deaths = deaths
-            country_with_min_deaths = row[2]
-
-    return country_with_min_deaths
+        if row[2] not in deathsByCountry.keys():
+            deathsByCountry[row[2]]=int(row[5])
+        else:
+            deathsByCountry[row[2]]+=int(row[5])
+    v = list(deathsByCountry.values())
+    k = list(deathsByCountry.keys())
+    return k[v.index(min(v))]
 
 
 def calculateAverageDeaths():
@@ -174,13 +175,13 @@ async def get_total_deaths(country: str = Query(None), region: str = Query(None)
 
 
 @app.get("/cases")
-async def get_total_deaths(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
+async def get_total_cases(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
     """
     Retrieves the total deaths for the given country, region, and year.
     If no parameters are provided, returns the total deaths for all countries.
     """
     try:
-        cases = calculateDeaths(country, region, year)
+        cases = calculateCases(country, region, year)
         return {"success": True, "cases": cases}
     except Exception as e:
         return {"success": False, "error": str(e)}
