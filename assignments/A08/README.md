@@ -43,6 +43,7 @@ http://localhost:8080 redirect to the homepage of the FastApi Swagger UI like be
     "success": true}
 ```
 ```
+
 * /regions
     
 http://localhost:8080/regions will provide the information of tjhe country codes we have in the csv
@@ -63,7 +64,7 @@ http://localhost:8080/regions will provide the information of tjhe country codes
 
 * /deaths
   
-http://localhost:8080 will provide the information of thr total death rates in each countries
+http://localhost:8080/deaths will provide the information of thr total death rates in each countries
 ```python
 {
     "success": true,
@@ -187,7 +188,7 @@ http://localhost:8080/max_deaths/?min_date=2020-01-01&max_date=2022-01-01
 
 * /avg_deaths
 
-http://localhost:8080/avg_deaths/ Finds the average number of deaths between all countries.
+http://localhost:8080/avg_deaths/. Finds the average number of deaths between all countries.
 
 ```python
 {
