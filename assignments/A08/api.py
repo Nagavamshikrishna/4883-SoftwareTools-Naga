@@ -1,17 +1,21 @@
+# Importing the required modules
 from fastapi import FastAPI, Query
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import csv
 
+# Description for the FastAPI application
 description = """🚀
 ## 4883 Software Tools
 ### Where awesomeness happens
 """
+# Creating an instance of the FastAPI application with the provided description
 
 app = FastAPI(
     description=description,
 )
+# Creating an instance of the FastAPI application with the provided description
 
 db = []
 
@@ -28,7 +32,7 @@ with open('data.csv', 'r') as file:
             continue
         db.append(row)
 
-
+# Helper function: Get unique countries from the data
 def getUniqueCountries():
     global db
     country = {}
@@ -38,7 +42,8 @@ def getUniqueCountries():
             country[row[2]] = 0
 
     return list(country.keys())
-
+    
+# Helper function: Get unique regions from the data
 
 def getUniqueRegions():
     global db
@@ -50,7 +55,7 @@ def getUniqueRegions():
 
     return list(regions.keys())
 
-
+# Helper function: Get unique deaths from the data
 def calculateDeaths(country=None, region=None, year=None):
     global db
     deaths = 0
@@ -67,7 +72,7 @@ def calculateDeaths(country=None, region=None, year=None):
 
     return deaths
 
-
+# Helper function: Get unique cases from the data
 def calculateCases(country=None, region=None, year=None):
     global db
     cases = 0
@@ -84,7 +89,7 @@ def calculateCases(country=None, region=None, year=None):
 
     return cases
 
-
+# Helper function: Get max_deaths from the data
 def findCountryWithMaxDeaths(min_date=None, max_date=None):
     global db
     max_deaths = 0
@@ -117,6 +122,7 @@ def findCountryWithMaxDeaths(min_date=None, max_date=None):
     }
     
 
+# Helper function: Get max_deaths from the data
 def findCountryWithMinDeaths(min_date=None, max_date=None):
     global db
     min_deaths = float('inf')
@@ -141,6 +147,7 @@ def findCountryWithMinDeaths(min_date=None, max_date=None):
     }
 
 
+# Helper function: Get average_deaths from the data
 def calculateAverageDeaths():
     global db
     total_deaths = 0
@@ -151,13 +158,13 @@ def calculateAverageDeaths():
 
     return total_deaths / num_countries
 
-
+# Providing routes for http:localhost:8080/docs
 @app.get("/")
 async def docs_redirect():
     """Retrieves the documentation provided by Swagger."""
     return RedirectResponse(url="/docs")
 
-
+# Providing routes for http:localhost:8080/countries
 @app.get("/countries")
 async def get_countries():
     """
@@ -190,7 +197,7 @@ async def get_countries():
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/regions
 @app.get("/regions")
 async def get_regions():
     """
@@ -225,7 +232,7 @@ async def get_regions():
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/deaths
 @app.get("/deaths")
 async def get_total_deaths(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
     """
@@ -297,7 +304,7 @@ async def get_total_deaths(country: str = Query(None), region: str = Query(None)
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/cases
 @app.get("/cases")
 async def get_total_cases(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
     """
@@ -370,7 +377,7 @@ async def get_total_cases(country: str = Query(None), region: str = Query(None),
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/max_deaths
 @app.get("/max_deaths")
 async def get_country_with_max_deaths(min_date: str = Query(None), max_date: str = Query(None)):
     """
@@ -437,7 +444,7 @@ async def get_country_with_max_deaths(min_date: str = Query(None), max_date: str
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/min_deaths
 @app.get("/min_deaths")
 async def get_country_with_min_deaths(min_date: str = Query(None), max_date: str = Query(None)):
     """
@@ -505,7 +512,7 @@ async def get_country_with_min_deaths(min_date: str = Query(None), max_date: str
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# Providing routes for http:localhost:8080/avg_deaths
 @app.get("/avg_deaths")
 async def get_average_deaths():
     """
@@ -541,6 +548,6 @@ async def get_average_deaths():
     except Exception as e:
         return {"success": False, "error": str(e)}
 
-
+# main function
 if __name__ == "__main__":
     uvicorn.run("api:app", host="localhost", port=8080, log_level="debug", reload=True)
