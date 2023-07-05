@@ -9,11 +9,13 @@ from bs4 import BeautifulSoup
 
 
 
+# Function to display daily weather data
 def daily():
+     # Parse HTML page source using BeautifulSoup
     soup = BeautifulSoup(page_source, 'html.parser')
-
+# Find the table containing weather data
     table = soup.find('lib-city-history-observation')
-
+# Extract table headers
     thead = table.find("thead")
     row = thead.find("tr")
     ths = row.find_all("th")
@@ -23,11 +25,11 @@ def daily():
         headers.append(th.text)
 
     print(headers)
-
+# Extract table rows
     tbody = table.find("tbody")
     rows = tbody.find_all("tr")
     
-
+# Extract row data
     rows_data = []
     for row in rows:
         ths = row.find_all("td")
@@ -40,21 +42,21 @@ def daily():
 
     data = rows_data[1:]
     print(data)
+    # Create GUI layout with a table to display data
     layout = [
         [sg.Table(values=data, headings=headers, justification='left')]
     ]
-
+# Create a window with the layout
     window = sg.Window('Weather Data', layout)
     event, _ = window.read()
     window.close()
 
 
-
-
+# Function to display weekly weather data
 def weekly():
-    
+    # Parse HTML page source using BeautifulSoup
     soup = BeautifulSoup(page_source, 'html.parser')
-
+# Find the table containing weather data
     table = soup.find('lib-city-history-observation')
     # print(table)
     thead = table.find("thead")
@@ -66,11 +68,11 @@ def weekly():
         headers.append(th.text)
     
     print(headers)
-
+ # Extract table rows
     tbody = table.find("tbody")
     rows = tbody.find_all("tr")
 
-    
+    # Extract row data  
     rows_data = []
     #print(rows)
     for row in rows:
@@ -81,7 +83,7 @@ def weekly():
         rows_data.append(row_data)
           
     
-
+    # Transform data for display in GUI
     data = rows_data[1:]
     final_data=[]
     for i in data:
@@ -90,7 +92,7 @@ def weekly():
         for j in i:
             s=s+das+j
         final_data.append(s)
-    
+# Reorganize data based on number of columns   
     d=int(len(final_data)/len(headers))
     find=[]
     for i in range(0,d):
@@ -101,23 +103,25 @@ def weekly():
             j=j+d
         find.append(a)
     print(find)
-
+# Create GUI layout with a table to display data
     
     layout = [
         [sg.Table(values=find, headings=headers, justification='left')]
     ]
 
-
+# Create a window with the layout
     window = sg.Window('Weather Data', layout)
     event, _ = window.read()
     window.close()
 
+# Function to display monthly weather data
+
 def monthly():
-   
+   # Parse HTML page source using BeautifulSoup
     soup = BeautifulSoup(page_source, 'html.parser')
-
+# Find the table containing weather data
     table = soup.find('lib-city-history-observation')
-
+ # Extract table headers
     thead = table.find("thead")
     row = thead.find("tr")
     ths = row.find_all("td")
@@ -127,11 +131,11 @@ def monthly():
         headers.append(th.text)
 
     print(headers)
-
+# Extract table rows
     tbody = table.find("tbody")
     rows = tbody.find_all("tr")
     
-
+ # Extract row data
     rows_data = []
     for row in rows:
         ths = row.find_all("td")
@@ -142,7 +146,7 @@ def monthly():
         rows_data.append(row_data)
 
    # print(rows_data)
-
+# Transform data for display in GUI
     data = rows_data[1:]
     
     final_data=[]
@@ -152,7 +156,7 @@ def monthly():
         for j in i:
             s=s+das+j
         final_data.append(s)
-    
+    # Reorganize data based on number of columns
     d=int(len(final_data)/len(headers))
     find=[]
     for i in range(0,d):
@@ -163,19 +167,22 @@ def monthly():
             j=j+d
         find.append(a)
     print(find)
+    # Reorganize data based on number of columns
     layout = [
         [sg.Table(values=find, headings=headers, justification='left')]
     ]
-
+# Create a window with the layout
     window = sg.Window('Weather Data', layout)
     event, _ = window.read()
     window.close()
   
 if __name__ == '__main__':
+     # Read airport codes from a CSV file
     with open('airport-codes.csv', 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         airport_data = list(reader)
         airport_codes = [airport['ident'] for airport in airport_data]
+      # Create the GUI layout using PySimpleGUI
     layout = [
     [sg.Text('Month', size=(15, 1))],
     [sg.DropDown(values=list(range(1, 13)), key='-MONTH-', size=(15, 1))],
@@ -189,10 +196,10 @@ if __name__ == '__main__':
     [sg.DropDown(values=['daily', 'weekly', 'monthly'], key='-FILTER-', size=(15, 1))],
     [sg.Submit(), sg.Cancel()]
 ]
-
+ # Create the GUI layout using PySimpleGUI
     window = sg.Window('Get The Weather', layout)
 
-    
+    # Event loop to capture user input 
     while True:
         event, values = window.read()
 
