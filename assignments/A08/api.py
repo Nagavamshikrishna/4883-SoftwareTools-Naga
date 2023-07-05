@@ -173,12 +173,13 @@ async def get_countries():
     #### Response 1:
 
         {
-            "total": 1000000,
-            "params": {
-                "country": null,
-                "year": null
-            }
-            "success": true,
+           "countries": [
+              "Afghanistan",
+              "Albania",
+              "Algeria",
+              "American Samoa"
+              ],
+          "success": True
         }
 
     
