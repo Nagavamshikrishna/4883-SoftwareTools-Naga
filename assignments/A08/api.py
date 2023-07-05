@@ -90,38 +90,55 @@ def findCountryWithMaxDeaths(min_date=None, max_date=None):
     max_deaths = 0
     country_with_max_deaths = None
     deathsByCountry = {}
+    DeathsData=[]
     for row in db:
         if min_date is not None and row[0] < min_date:
             continue
         if max_date is not None and row[0] > max_date:
             continue
 
+        DeathsData.append(row)
+
+
         if row[2] not in deathsByCountry.keys():
-            deathsByCountry[row[2]]=int(row[5])
+            deathsByCountry[row[2]]=int(row[7])
         else:
-            deathsByCountry[row[2]]+=int(row[5])
+            deathsByCountry[row[2]]+=int(row[7])
+    max_death_row=DeathsData[0]
+    for row in DeathsData:
+        if int(row[7])>int(max_death_row[7]):
+            max_death_row=row
     v = list(deathsByCountry.values())
     k = list(deathsByCountry.keys())
-    return k[v.index(max(v))]
+    return{
+         max_death_row[2],
+         max_death_row[7]
+
+    }
+    
 
 def findCountryWithMinDeaths(min_date=None, max_date=None):
     global db
     min_deaths = float('inf')
     country_with_min_deaths = None
     deathsByCountry={}
+    DeathsData=[]
     for row in db:
         if min_date is not None and row[0] < min_date:
             continue
         if max_date is not None and row[0] > max_date:
             continue
+        DeathsData.append(row)
+    
+    min_death_row=DeathsData[0]
+    for row in DeathsData:
+        if int(row[7])<int(min_death_row[7]):
+            min_death_row=row
 
-        if row[2] not in deathsByCountry.keys():
-            deathsByCountry[row[2]]=int(row[5])
-        else:
-            deathsByCountry[row[2]]+=int(row[5])
-    v = list(deathsByCountry.values())
-    k = list(deathsByCountry.keys())
-    return k[v.index(min(v))]
+    return{
+         min_death_row[2],
+         min_death_row[7]
+    }
 
 
 def calculateAverageDeaths():
@@ -130,7 +147,7 @@ def calculateAverageDeaths():
     num_countries = len(getUniqueCountries())
 
     for row in db:
-        total_deaths += int(row[5])
+        total_deaths += int(row[6])
 
     return total_deaths / num_countries
 
@@ -146,7 +163,7 @@ async def get_countries():
     """Retrieves a list of unique countries from the 'db'."""
     try:
         countries = getUniqueCountries()
-        return {"success": True, "countries": countries}
+        return {"countries": countries, "success": True }
     except Exception as e:
         return {"success": False, "error": str(e)}
 
@@ -161,7 +178,7 @@ async def get_regions():
         return {"success": False, "error": str(e)}
 
 
-@app.get("/deaths")
+@app.get("/deaths/")
 async def get_total_deaths(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
     """
     Retrieves the total deaths for the given country, region, and year.
@@ -169,12 +186,21 @@ async def get_total_deaths(country: str = Query(None), region: str = Query(None)
     """
     try:
         deaths = calculateDeaths(country, region, year)
+        deaths={
+            "total_deaths":  int(deaths),
+            "params": {
+                    "country": country,
+                    "region": region,
+                    "year": year
+                },
+                "success": True,
+            }
         return {"success": True, "deaths": deaths}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 
-@app.get("/cases")
+@app.get("/cases/")
 async def get_total_cases(country: str = Query(None), region: str = Query(None), year: str = Query(None)):
     """
     Retrieves the total deaths for the given country, region, and year.
@@ -182,12 +208,22 @@ async def get_total_cases(country: str = Query(None), region: str = Query(None),
     """
     try:
         cases = calculateCases(country, region, year)
-        return {"success": True, "cases": cases}
+        #total_cases = remaining_data['New_cases'].sum()
+        new_cases={
+            "cases":  int(cases),
+            "params": {
+                    "country": country,
+                    "region": region,
+                    "year": year
+                },
+                "success": True,
+            }
+        return {"success": True, "cases": new_cases}
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 
-@app.get("/max_deaths")
+@app.get("/max_deaths/")
 async def get_country_with_max_deaths(min_date: str = Query(None), max_date: str = Query(None)):
     """
     Finds the country with the most deaths.
@@ -195,12 +231,21 @@ async def get_country_with_max_deaths(min_date: str = Query(None), max_date: str
     """
     try:
         country = findCountryWithMaxDeaths(min_date, max_date)
-        return {"success": True, "country": country}
+        max_death={
+            "cases":  country,
+            "params": {
+                    "min_date": min_date,
+                    "max_date": max_date
+                },
+                "success": True,
+            }
+        
+        return max_death
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 
-@app.get("/min_deaths")
+@app.get("/min_deaths/")
 async def get_country_with_min_deaths(min_date: str = Query(None), max_date: str = Query(None)):
     """
     Finds the country with the least deaths.
@@ -208,17 +253,28 @@ async def get_country_with_min_deaths(min_date: str = Query(None), max_date: str
     """
     try:
         country = findCountryWithMinDeaths(min_date, max_date)
-        return {"success": True, "country": country}
+        min_death={
+            "cases":  country,
+            "params": {
+                    "min_date": min_date,
+                    "max_date": max_date
+                },
+                "success": True,
+            }
+        
+        return min_death
     except Exception as e:
         return {"success": False, "error": str(e)}
 
 
-@app.get("/avg_deaths")
+@app.get("/avg_deaths/")
 async def get_average_deaths():
     """Finds the average number of deaths between all countries."""
     try:
         avg_deaths = calculateAverageDeaths()
+        
         return {"success": True, "average_deaths": avg_deaths}
+    
     except Exception as e:
         return {"success": False, "error": str(e)}
 
