@@ -28,21 +28,21 @@ http://localhost:8080 redirect to the homepage of the FastApi Swagger UI like be
   http://localhost:8080/countries will provide the data of the country list like below
 
   ```python
-  {
-    "countries": [
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "American Samoa",
-        "Andorra",
-        "Angola",
-        "Anguilla",
-        "Antigua and Barbuda",
-        "ETC"
-    ],
-    "success": true}
-```
-```
+   {
+          "countries": [
+              "Afghanistan",
+              "Albania",
+              "Algeria",
+              "American Samoa",
+              "Andorra",
+              "Angola",
+              "Anguilla",
+              "Antigua and Barbuda",
+              "ETC"
+          ],
+          "success": true
+    }
+  ```
 
 * /regions
     
