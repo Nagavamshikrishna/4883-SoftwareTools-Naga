@@ -317,7 +317,7 @@ async def get_total_cases(country: str = Query(None), region: str = Query(None),
 
     #### Example 1:
 
-    [http://localhost:8080/deaths/](http://localhost:8080/deaths/)
+    [http://localhost:8080/cases/](http://localhost:8080/cases/)
 
     #### Response 1:
 
@@ -388,7 +388,7 @@ async def get_country_with_max_deaths(min_date: str = Query(None), max_date: str
 
     #### Example 1:
 
-    [http://localhost:8080/deaths/](http://localhost:8080/deaths/)
+    [http://localhost:8080/max_deaths/](http://localhost:8080/max_deaths/)
 
     #### Response 1:
 
@@ -473,21 +473,21 @@ async def get_country_with_min_deaths(min_date: str = Query(None), max_date: str
 
     #### Example 2:
 
-    [http://localhost:8080/max_deaths/?min_date=2020-01-01&max_date=2022-01-01](http://localhost:8080/max_deaths/?min_date=2020-01-01&max_date=2022-01-01)
+    [http://localhost:8080/min_deaths/?min_date=2020-01-01&max_date=2022-01-01](http://localhost:8080/min_deaths/?min_date=2020-01-01&max_date=2022-01-01)
 
     #### Response 2:
 
-                        {
+                                    {
                 "cases": [
-                    "United States of America",
-                    "820389"
+                    "0",
+                    "Afghanistan"
                 ],
                 "params": {
                     "min_date": "2020-01-01",
                     "max_date": "2022-01-01"
                 },
                 "success": true
-                }
+            }
 
     """
     try:
