@@ -185,6 +185,20 @@ http://localhost:8080/max_deaths/?min_date=2020-01-01&max_date=2022-01-01
 
   
 ```
+http://localhost:8080/min_deaths?min_date=2020-01-01&max_date=2022-01-01
+```python
+{
+    "cases": [
+        "0",
+        "Afghanistan"
+    ],
+    "params": {
+        "min_date": "2020-01-01",
+        "max_date": "2022-01-01"
+    },
+    "success": true
+}
+```
 
 * /avg_deaths
 
