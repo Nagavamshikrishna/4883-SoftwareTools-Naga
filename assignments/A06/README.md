@@ -1,3 +1,4 @@
+# A06 - Software Tools Presentation
 ## Overview of Terraform for AWS
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision infrastructure resources across various cloud providers, including Amazon Web Services (AWS). With Terraform, you can manage your infrastructure using declarative configuration files, enabling you to treat your infrastructure as code and apply version control and automation principles to your infrastructure provisioning process.
